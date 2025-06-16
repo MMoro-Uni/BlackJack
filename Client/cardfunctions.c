@@ -1,8 +1,47 @@
+/*!
+* \file cardfuntctions.c
+* \brief contains functions for handling cards.
+* This file is designed to be able to be used in other projects.
+* When using this file in other projects, remember to include the custom structs from cardstructs.h
+*/
+
+/*!
+* \fn DECK fill_deck(int deck_number)
+* \brief creates a deck of cards with number of cards equal to the amount of cards in the given number of standard 52 card decks.
+* Rank of created cards goes from 1 to 13, while their suit is either "Clubs", "Diamonds", "Hearts" or "Spades".
+* For usage in card games that don't use standard cards, remember to change suit and rank value or map the values to other values somewhere else.
+* The CARD* in the deck struct is initialized as an array of CARD through malloc, remember to dealloc in the code.
+* Return value is the created deck.
+*/
+
+/*!
+* \fn void shuffle_deck(DECK* to_shuffle)
+* \brief shuffles the DECK pointed by the given pointer.
+* Shuffling is done through the Fisher-Yates shuffle.
+*/
+
+/*!
+* \fn card_swap(CARD* first, CARD* second)
+* \brief util function for shuffle_deck, swaps two cards in a given position
+*/
+
+/*!
+* \fn CARD draw_card(DECK* deck_to_use)
+* \brief draws a card from the deck pointed by given pointer and returns it
+* CARDs inside the given DECK are shiften forward after the draw, but memory is not reallocated.
+* This allows refilling the deck without reallocating and allows function usage with DECKs not created through fill_deck
+*/
+
+/*!
+* \fn int calculate_score(CARD hand_to_evaluate[], int card_number)
+* \brief calculates the score of a given blackjack hand and returns it
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include "cardstructs.h"
-#include <raylib.h>
+
 
 void card_swap(CARD* first, CARD* second);
 
