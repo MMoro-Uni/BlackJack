@@ -1,3 +1,19 @@
+/*!
+* \file blackjackclient.h
+* \brief contains structures for login and function declarations for blackjackclient.c.
+* Function definitions are contained in the documentation for the .c file
+*/
+
+/*!
+* \enum login_mode
+* \brief enum for values to select login or register
+*/
+
+/*!
+* \enum login_result
+* \brief enum for results of login and register
+*/
+
 typedef enum login_mode
 {
     LOGIN_MODE = 20,
