@@ -4,15 +4,21 @@
 * The code in this file is not meant for usage in other projects. Don't include without changes.
 * Global variables are used to avoid deallocation and reallocation of memory when not needed.
 * If changing the code to support a server different from localhost, this design would not work and changes would be needed.
-* 
+*/
+
+/*!
 * \fn void close_connection()
 * \brief small util function to improve readability
-* 
+*/
+
+/*!
 * \fn int client_connection_init()
 * \brief connects the client to the server.
 * client connects always to port 27015 of localhost through an IPv4 IP.
 * return value is 1 if errors happened, 0 if connection was successful.
-* 
+*/
+
+/*!
 * \fn int server_login(char username[], char password[], MODE mode)
 * \brief starts the login process or the register process based on mode.
 * The client will first send an "Username:<value>" query, which tells the server to save the given username for use.
@@ -20,6 +26,9 @@
 * In the end, either a "Login" or a "Register" query is sent, which tells the server what operation to execute.
 * The server can return "logok" or "logfail" for login and "regok" or "regfail" for register. Those values are used to determine if operation was successful.
 * Return value is 1 if errors happened, 0 if connection was successful.
+*/
+
+/*!
 * 
 * \fn int money_value_update(int modify_value)
 * \brief changes the amount of money the player has by modify_value
@@ -27,7 +36,9 @@
 * For the modify query the server uses the username and password that were saved during the login process.
 * To avoid unintended behaviour, always call this function when sure that an user completed the login process.
 * Return value is 1 if errors happened, 0 if connection was successful.
-* 
+*/
+
+/*!
 * \fn int money_value_get()
 * \brief gets the amount of money the player has.
 * The client sends a "GetVal" query to the server, which then returns a string with the amount of money the player has.
