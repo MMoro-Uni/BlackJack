@@ -32,3 +32,79 @@ Il sistema ha quindi l'obiettivo di essere semplice da utilizzare per l'utente e
 
 | Attore | Descrizione |
 |--------|-------------|
+|Giocatore|Utente finale del sistema, interessato a giocare|
+|Sistema|Gestisce l'interfaccia e la logica di gioco, si interfaccia con il server|
+|Server|Gestisce il database con le credenziali del giocatore e il suo bilancio|
+
+### Funzionalità per il giocatore
+
+#### Registrazione e Login al server
+* Registrazione con username e password dati
+* Login su account esistenti
+* Salvataggio automatico dei risultati sul server per utilizzo successivo
+* Possibilità di giocare senza account
+
+#### Giocare contro il banco automatico
+* possibilità di hit, stand, double down e forfeit
+* vedere graficamente l'andamento della partita e la propria mano
+* ricevere il risultato della partita una volta terminata
+
+#### Scommettere
+* avere un bilancio digitale salvato sul server
+* aumentare o diminuire il bilancio digitale attraverso scommesse sull'esito della partita
+* vincere o perdere di più o di meno in base all'azione scelta o al risultato ottenuto
+
+### Funzionalità per il sistema
+
+#### Gestione della logica di gioco
+* calcolare correttamente il punteggio della mano del giocatore e del banco
+* trovare l'esito corretto della partita
+* gestire la creazione e distribuzione di carte
+* gestire la logica del banco automaticoù
+
+#### Interfacciamento con il server
+* gestire il login e la registrazione sul server
+* gestire la modifica dei dati presenti sul server (esempio: bilancio)
+* ricevere e interpretare risultati dal server
+* gestire la mancanza di connessione
+
+### Funzionalità per il server
+
+#### Interfacciamento con il database
+* cercare un utente all'interno del database
+* creare un nuovo utente all'interno del database
+* trovare il bilancio di un dato utente
+* modificare il bilancio di un dato utente
+* inviare segnali sull'esito delle operazioni al client
+
+#### Lettura di segnali inviati dal client
+* ricevere query dal client
+* interpretare i query ricevuti e gli eventuali dati inclusi
+* eseguire le operazioni richieste
+* inviare al client una conferma
+
+### Requisiti non funzionali
+
+|Requisito|Descrizione|
+|---------|-----------|
+|Affidabilità|Gestione degli errori, mancanza di crash che richiedano riavvio del sistema|
+|Interfaccia Utente|Interfaccia grafica facile da usare per l'utente|
+|Performanca|Tempo di risposta dell'interfaccia < 0.25s, tempo di risposta del server < 0.5s|
+
+### Flusso utente - Esempio (Partita con connessione al server)
+
+1. L'utente apre il programma
+2. Effettua la registrazione sul server (salta il passaggio se già registrato)
+3. Effettua il login
+4. Preme play ed entra in partita
+5. Vede le carte iniziali e la prima carta del banco
+6. Imposta una puntata
+7. Pesca carte fino al raggiungimento di un valore vicino al 21
+8. Preme Stand per finire di pescare
+9. Vede le carte pescate dal dealer e ottiene il risultato della partita
+10. Preme Retry per iniziare una nuova partita
+
+### Requisiti funzionali
+di seguito sono descritte schematicamente le funzionalità implementate
+
+|Funzionalità|Descrizione|
