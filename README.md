@@ -373,6 +373,8 @@ Il server è in grado di inviare segnali in risposta, sempre sotto forma di stri
 |dbfunctions.h|AlterMoney|GameLogin|
 |dbfunctions.h|GetMoney|GameLogin, get_money_callback|
 
+dipendenze segnate con * sono dipendenze consigliate ma non essenziali (ex. fill_deck crea un mazzo con le caratteristiche per essere usato dalle funzioni per le carte, ma sarebbe possibile crearne uno adeguato senza usare la funzione)
+
 ## Pseudocodice
 
 ### main
@@ -650,9 +652,58 @@ return punteggio;
  
 ```
 
+## Codifica
+
+La soluzione proposta è stata interamente implementata in linguaggio C usando un approccio procedurale e una struttura modulare.  
+Le varie funzioni hanno uno scopo definito, facilitando la manutenzione e il debug.  
+
+La lettura del codice è facilitata attraverso l'uso di enum per i segnali.  
+
+I tipi di dati principali (carte e mazzi) sono gestiti mediante l'uso di struct.  
+
+## Test
+
+|Nome|Descrizione test|Input|Risultato atteso|Risultato ottenuto|
+|----|----------------|-----|----------------|------------------|
+|Play|offline| |inizio partita senza delay, scritte bilancio nascoste|inizio partita senza delay, scritte bilancio nascoste|
+| |online| |inizio partita, scritte bilancio visibili|inizio partita, scritte bilancio visibili|
+|Login(login)|Username e password validi inseriti|UCSA, testpass1|ritorno al menù principale, comparsa bilancio|ritorno al menù principale, comparsa bilancio|
+| |Username e password non registrati inseriti|NOTEXISTS, NOTEXISTS|ritorno al menù principale, nessuna scritta comparsa, niente delay|ritorno al menù principale, nessuna scritta comparsa, niente delay|
+| |Username e password vuoti| |ritorno al menù principale, accesso all'account di test|ritorno al menù principale, accesso all'account di test|
+|Register(register)|Username e password validi inseriti|testRegister, testPassRegister|ritorno al menù principale, login con credenziali inserite riuscito|ritorno al menù principale, login con credenziali inserite riuscito|
+| |Username e password vuoti| |ritorno al menù principale, chiusura del server per errore*|ritorno al menù principale, chiusura del server per errore|
+|Hit|bottone premuto| |pesca carta, mostrata a schermo|pesca carta, mostrata a schermo|
+| |bottone premuto mentre altra schermata attiva| |nessuna azione|nessuna azione|
+|Double Down|offline| |pesca carta e fine partita|pesca carta e fine partita|
+| |online| |pesca carta, fine partita, puntata raddoppiata|pesca carta, fine partita, puntata raddoppiata|
+| |offline, altra schermata attiva| |nessuna azione|nessuna azione|
+| |online, altra schermata attiva| |nessuna azione|nessuna azione|
+|Bet(game)|bottone premuto mentre altra schermata attiva| |nessuna azione|nessuna azione|
+| |offline| |nessuna azione|nessuna azione|
+| |online| |apertura schermata puntata|apertura schermata puntata|
+|Bet(bet)|valore inserito positivo|100|valore della puntata cambiato nel valore inserito|valore della puntata cambiato nel valore inserito|
+| |valore inserito negativo|-100|valore della puntata cambiato in 0|valore della puntata cambiato in 0|
+| |non numero inserito|abcd|ogni lettera viene convertita in un valore fra 10 e 35 per comporre il numero**|ogni lettera viene convertita in un valore fra 10 e 35|
+|Surrend|mano vincente online| |sconfitta, perdita di metà della puntata|sconfitta, perdita di metà della puntata|
+| |mano perdente online| |sconfitta, perdita di metà della puntata|sconfitta, perdita di metà della puntata|
+| |mano vincente offline| |sconfitta|sconfitta|
+| |mano perdente offline| |sconfitta|sconfitta|
+|Stand|mano perdente online| |sconfitta, perdita uguale alla puntata|sconfitta, perdita uguale alla puntata|
+| |mano vincente online| |vittoria, vincita uguale alla puntata|vittoria, vincita uguale alla puntata|
+| |blackjack online| |vittora, blackjack, vincita uguale al doppio della puntata|vittoria, vincita uguale al doppio della puntata|
+| |parità online| |pareggio, nessuna vincita|pareggio, nessuna vincita|
+| |mano perdente offline| |sconfitta|sconfitta|
+| |mano vincente offline| |vittoria|vittoria|
+| |blackjack offline| |vittoria, blackjack|vittoria, blackjack|
+| |parità offline| |pareggio|pareggio|
 
 
 
+
+
+*in caso di errore nel database il server è impostato per chiudersi automaticamente. Visto che i nomi utente devono essere unici ed esiste già un utente senza credenziali (usabile come utente test o come utente indipendente da un account) il database ritorna errore, quindi il server si chiude.
+
+**la conversione da stringa a numero è fatta usando strtol(). Il comportamento di strtol() in caso di non numeri è di convertire i non numeri in valori numerici.
 
 
 
