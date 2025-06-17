@@ -388,7 +388,7 @@ altrimenti
  mentre(comincia nuova partita);
 }
 ```
-### main menu
+### menù principale
 ```
 imposta_sfondo(verde);
 disegna_testo("BlackJack") con font("JqkasWild-w1YD6");
@@ -405,6 +405,65 @@ se (bottone_login_premuto)
  login_giocatore();
 }
 
+se (bottone_register_premuto)
+{
+ register_giocatore();
+}
+```
+### login giocatore
+```
+crea_input_box()
+crea_bottoni()
+
+se (bottone_login_premuto)
+{
+ prendi (username) da (input_box_username);
+ prendi (password) da (input_box_password);
+ server_login(username, password);
+
+ se (server_login)
+ {
+  return online;
+ }
+ altrimenti
+ {
+  return offline;
+ }
+}
+
+se (bottone_back_premuto)
+{
+ return online_mode;
+}
+
+```
+### register giocatore
+```
+crea_input_box()
+crea_bottoni()
+
+se (bottone_register_premuto)
+{
+ prendi (username) da (input_box_username);
+ prendi (password) da (input_box_password);
+ server_register (username, password);
+
+ se (server_login)
+ {
+  return online;
+ }
+ altrimenti
+ {
+  return offline;
+ }
+}
+
+se (bottone_back_premuto)
+{
+  return online_mode;
+}
+
+```
 
 
 
