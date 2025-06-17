@@ -306,6 +306,57 @@ Il server è in grado di inviare segnali in risposta, sempre sotto forma di stri
 * raygui.h: libreria ausiliare di raylib per la creazione facilitata di elementi per l'interfaccia grafica
 * sqlite3.h: usata per la gestione di database SQLite
 
+### Librerie esterne personalizzate
 
+* blackjackclient.h
+  * typedef enum login_mode MODE
+  * typedef enum login_result RESULT
+  * int server_login(char username[], char password[], MODE mode)
+  * int money_value_update(int modify_value)
+  * int money_value_get()
+* cardfunctions.h
+  * DECK fill_deck(int deck_number)
+  * void shuffle_deck(DECK* to_shuffle)
+  * CARD draw_card(DECK* deck_to_use)
+  * int calculate_score(CARD hand_to_evaluate[], int card_number)
+* cardstructs.h
+  * typedef struct card CARD
+  * typedef struct deck DECK
+* gamemenu.h
+  * typedef enum online_mode ONMODE
+  * ONMODE MainMenu()
+* gamewindow.h
+  * typedef enum endgame_signals SIGNAL
+  * int GameStart(ONMODE online_mode)
+* dbfunctions.h
+  * define DB_CONN_FAIL 10
+  * define NO_USER_FOUND 11
+  * define USER_FOUND 12
+  * define DB_ERROR 13
+  * define REG_DONE 14
+  * define UPDATE_DONE 15
+  * define OBRAIN_DONE 16
+  * int GameLogin(char username[], char password[], sqlite3* ConnectedDB)
+  * int GameRegister(char username[], char password[], sqlite3* ConnectedDB)
+  * int AlterMoney(char username[], char password[], int value_modifier, sqlite3* ConnectedDB)
+  * int GetMoney(char username[], char password[], char money_buffer[], sqlite3* ConnectedDB)
+
+## Dipendenze tra funzioni
+
+|File|Funzione|Dipende da|
+|----|--------|----------|
+|blackjackclient.h|server_login|client_connection_init, close_connection|
+|blackjackclient.h|money_value_update|client_connection_init, close_connection|
+|blackjackclient.h|money_value_get|client_connection_init, close_connection|
+|cardfunctions.h|fill_deck| - |
+|cardfunctions.h|shuffle_deck|card_swap, fill_deck*|
+|cardfunctions.h|draw_card|fill_deck*|
+|cardfunctions.h|calculate_score| - |
+|gamemenu.h|MainMenu| LoginReisterInterface, money_value_get |
+|gamewindow.h|GameStart|GameWindow_init, money_value_get, draw_card, calculate_score, window_draw_card, draw_bet_screen, money_value_update, draw_end_screen|
+|dbfunctions.h|GameLogin|login_callback|
+|dbfunctions.h|GameRegister| - |
+|dbfunctions.h|AlterMoney|GameLogin|
+|dbfunctions.h|GetMoney|GameLogin, get_money_callback|
 
 
