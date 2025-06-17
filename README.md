@@ -258,8 +258,6 @@ Il server è in grado di inviare segnali in risposta, sempre sotto forma di stri
 
 ## Principali variabili, strutture di dati e file
 
-### Client
-
 |File|Nome|Tipo|Ruolo|Descrizione|Valori|
 |---------|---------|---------|-------------|--------------------------------|------------|
 |blackjackclient.c|iResult|int|variabile globale|contiene il risultato delle operazioni del client| |
@@ -287,4 +285,27 @@ Il server è in grado di inviare segnali in risposta, sempre sotto forma di stri
 |cardstructs.h|deck|struct| |struct per i mazzi, typedef come DECK|CARD* cards, int current_card_number;|
 |gamemenu.h|online_mode|enum| |enum per il successo del login, typedef come ONMODE|ONLINE_PLAY = 10, OFFLINE_PLAY|
 |gamewindow.h|endgame_signals|enum| |enum per il segnale di fine gioco, typedef come SIGNAL|PLAYER_WIN = 100, PLAYER_LOSE, PLAYER_BUST, PLAYER_CHARLIE, PLAYER_BLACKJACK, PLAYER_DRAW|
+
+## Librerie e funzioni
+
+### Librerie standard utilizzate
+
+* windows.h: non necessaria ma possibilmente utile per la compatibilità con windows di alcune librerie
+* winsock2.h: utilizzata per gestire la connessione al server
+* WS2tcpip.h: libreria ausiliaria per winsock2
+* iphlpapi.h: usata per la gestione degli indirizzi ip
+* stdio.h: usata per l'output di errori su stdin
+* string.h: usata per gestire operazioni sulle stringhe
+* stdlib.h: usata per alcune operazioni sulle stringhe (come strtol) e per l'allocazione di memoria
+* time.h: usata per la generazione casuale di valori
+* math.h: usata per le radici quadrate
+
+### Librerie esterne non personalizzate
+
+* raylib.h: usata per la gestione dell'interfaccia grafica
+* raygui.h: libreria ausiliare di raylib per la creazione facilitata di elementi per l'interfaccia grafica
+* sqlite3.h: usata per la gestione di database SQLite
+
+
+
 
