@@ -107,4 +107,44 @@ Il sistema ha quindi l'obiettivo di essere semplice da utilizzare per l'utente e
 ### Requisiti funzionali
 di seguito sono descritte schematicamente le funzionalità implementate
 
-|Funzionalità|Descrizione|
+#### Giocatore
+
+|Luogo|Funzionalità|Descrizione|
+|-----|------------|-----------|
+|Menù iniziale|Play|permette di entrare nel tavolo virtuale|
+|Menù iniziale|Login|permette di passare all'interfaccia di login|
+|Menù iniziale|Register|permette di passare all'interfaccia di registrazione|
+|Menù login|Login|permette di connettersi al server con le credenziali inserite|
+|Menù login|Back|permette di tornare al menù iniziale|
+|Menù register|Register|permette di registrare le credenziali inserite sul server|
+|Menù register|Back|permette di tornare al menù iniziale|
+|Tavolo|Hit|permette di pescare una carta|
+|Tavolo|Stand|permette di finire di pescare|
+|Tavolo|Surrend|permette di arrendersi e perdere la metà della puntata|
+|Tavolo|Double Down|permette di pescare un'ultima carta e raddoppiare la puntata|
+|Tavolo|Bet|permette di accedere al menù della puntata|
+|Menù puntata|Bet|permette di impostare la puntata al valore dato|
+|Menù finale|Retry|permette di iniziare una nuova partita|
+
+#### Funzioni del sistema
+
+|File|Funzione|Descrizione|
+|----|--------|-----------|
+|main.c|int main(void)|funzione main del programma, chiama le funzioni per il menù e la schermata di gioco. Chiama nuovamente la funzione di gioco quando l'utente preme retry|
+|blackjackclient.c|int server_login(char username[], char password[], MODE mode)|manda un segnale di login o register (in base a mode) al server e restituisce il risultato. 1 se la richiesta è fallita, 0 se ha avuto successo|
+|blackjackclient.c|int money_value_update(int modify_value)|manda al server un segnale per cambiare il bilancio di un giocatore di modify_value. Restituisce 1 in caso di errori, 0 in caso di successo|
+|blackjackclient.c|int money_value_get()|manda al server un segnale per ricevere il bilancio di un utente. Ritorna 1 in caso di errori, il bilancio dell'utente in caso di successo|
+|cardfunctions.c|DECK fill_deck(int deck_number)|crea e restituisce un mazzo di carte con numero di carte uguale al numero di carte nel numero di mazzi da 52 carte passati|
+|cardfunctions.c|void shuffle_deck(DECK* to_shuffle)|mischia il mazzo puntato dal puntatore dato|
+|cardfunctions.c|CARD draw_card(DECK* deck_to_use)|pesca una carta dal mazzo puntato dal puntatore dato e la restituisce|
+|cardfunctions.c|int calculate_score(CARD hand_to_evaluate[], int card_number)|calcola il punteggio della mano di blackjack data|
+|gamemenu.c|ONMODE MainMenu()|crea il menù principale e chiama le funzioni associate ai bottoni del menù|
+|gamemenu.c|RESULT LoginRegisterInterface(MODE mode)|crea la schermata di registrazione o la schermata di login in base al valore di mode e chiama funzioni del client per la comunicazione con il server|
+|gamewindow.c|int GameStart(ONMODE online_mode)|crea la finestra di gioco e gestisce la logica del gioco. Comunica con il server se online_mode dice che si è collegati a un server. Ritorna 1 se deve iniziare una nuova partita, altrimenti 0|
+|gamewindow.c|void window_draw_card(CARD card_to_draw, Rectangle place_to_draw)|gestisce la creazione delle carte sull'interfaccia grafica|
+|gamewindow.c|void draw_end_screen(SIGNAL mode)|crea la schermata finale. Usa mode per scegliere il messaggio da visualizzare|
+|gamewindow.c|int draw_bet_screen()|crea la schermata per impostare la puntata, ritorna il valore della puntata|
+
+
+
+#### Funzioni del server
