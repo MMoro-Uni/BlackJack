@@ -49,6 +49,9 @@ RESULT LoginRegisterInterface(MODE mode);
 
 ONMODE MainMenu()
 {
+    //variable declaration
+    //variables are not static because they are currently only initialized once.
+
     Vector2 TitlePositionVec;
     Vector2 MoneyTextPositionVec;
     Rectangle ButtonArray[BUTTON_AMOUNT];
@@ -84,6 +87,11 @@ ONMODE MainMenu()
     GuiSetStyle(TEXTBOX, TEXT_COLOR_FOCUSED, WHITE_32);
     GuiSetStyle(TEXTBOX, TEXT_COLOR_PRESSED, WHITE_32);
     GuiSetStyle(TEXTBOX, BASE_COLOR_PRESSED, BLUE_TRANSP_32);
+
+    //main loop
+    //while in gamewindow.c only the main function of the file has a loop, in this file every function does
+    //the reason for this is that this was easier to design, and once i noticed the mistake in gamewindow.c it was already working
+    //it would be better to change gamewindow.c, but it would bring almost no performance gain and it wouldnt change the functioning of the program.
 
     while (!WindowShouldClose())
     {
@@ -153,6 +161,9 @@ ONMODE MainMenu()
 
 RESULT LoginRegisterInterface(MODE mode)
 {
+    //variable declaration
+    //function can be called multiple times, so variables are made static to avoid useless allocations and deallocations of memory
+    
     static bool username_edit_mode = false;
     static bool password_edit_mode = false;
     static bool log_reg_button_pressed = false;
@@ -198,6 +209,8 @@ RESULT LoginRegisterInterface(MODE mode)
     {
         strcpy(button_label_text, "LOGIN");
     }
+
+    //function loop
 
     while (!WindowShouldClose())
     {
