@@ -171,4 +171,26 @@ di seguito sono descritte schematicamente le funzionalità implementate
 |dbfunctions.c|int AlterMoney(char username[], char password[], int value_modifier, sqlite3* ConnectedDB)|modifica il bilancio dell'utende dato del valore indicato da value_modifier. Prima di modificare il valore controlla l'esistenza dell'utente. Ritorna UPDATE_DONE (15) se l'operazione ha avuto successo|
 |dbfunctions.c|int GetMoney(char username[], char password[], char money_buffer[], sqlite3* ConnectedDB)|inserisce in money_buffer una stringa contenente il bilancio dell'utente dato. Prima di inserire il valore nella stringa controlla l'esistenza dell'utente. Ritorna OBTAIN_DONE (16) se l'operazione ha avuto successo|
 
+## Casi d'uso
 
+|Nome|Pre-condizioni|Descrizione|Post-condizioni|Descrizione|Scenario base|Scenario alternativo|
+|----|--------------|-----------|---------------|-----------|-------------|--------------------|
+|Play|menù principale creato, play premuto| |play| |il sistema carica il tavolo virtuale| |
+|Login (main)|menù principale creato, main premuto| |login| |il sistema carica la schermata di login| |
+|Login (login)|login, login premuto| |successo, errore|il login è avvenuto correttamente, il login non è avvenuto correttamente|il sistema carica il menù principale e mostra il bilancio del giocatore, il bilancio verrà caricato nel tavolo virtuale|il sistema carica il menù principale. Il bilancio non verrà caricato|
+|Register (main)|menù principale creato, register premuto| |register| |il sistema carica la schermata per la registrazione| |
+|Register (register)|register, register premuto| |successo, errore|ritorno al menù principale, l'utente è registrato nel database|ritorno al menù principale, l'utente non è registrato nel database|
+|Back|register o login, tasto Back premuto|uno fra i tasti register e login è stato premuto nel menù principale|successo| |torna al menù principale| |
+|Hit|play, hit premuto| |successo, errore|successo se sta lo spazio per pescare una carta, errore se non sta|una carta viene pescata e aggiunta alla mano|nessuna carta viene pescata|
+|Stand|play, stand premuto| |successo| |il gioco termina e punteggio e risultato vengono calcolati| |
+|Surrend|play, surrend premuto| |successo| |il gioco termina e il giocatore si arrende| |
+|Double Down|play, double down premuto| |successo| |pesca una carta, raddoppia la puntata e termina il gioco| |
+|Bet (game)|play, online, bet premuto|online: il login è avvenuto con successo|bet| |crea la finestra per le puntate| |
+|Bet (bet)|bet, bet premuto| |successo| |imposta la puntata e torna alla schermata di gioco| |
+|Retry|end, retry premuto|end: la partita è finita|Play|chiama la funzione Play|ricomincia il gioco| |
+
+## Progettazione
+
+### Per l'interfaccia utente
+
+Il sistema è stato progettato con un'interfaccia grafica
