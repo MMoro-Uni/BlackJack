@@ -2,7 +2,9 @@
 * \file BlackJackServer.c
 * \brief Contains the code for handling sockets and accepting client connections
 *		 Current code will only work for localhost and for this project.
-* 
+*/
+
+/*!
 * \fn int main(int argc char* argv[])
 * \brief server loop is inside main since no other function was needed.
 *		 when starting the program, the loop starts automatically.
@@ -20,8 +22,9 @@
 * "regok": indicates that the registration process finished successfully
 * "updated": indicates the amount of money has been updated correctly
 * "<value>: returns the amount of money the player has
-* 
-* signals received by the server:
+*/
+
+/* signals received by the server:
 * "Username:<username>": tells the server to save <username> as username for login
 * "Password:<password>": tells the server to save <password> as password for login
 * "Login": tells the server to start the login process
