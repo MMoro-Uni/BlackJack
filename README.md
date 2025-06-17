@@ -193,4 +193,70 @@ di seguito sono descritte schematicamente le funzionalità implementate
 
 ### Per l'interfaccia utente
 
-Il sistema è stato progettato con un'interfaccia grafica
+Il sistema è stato progettato con un'interfaccia grafica per facilitare l'interazione dell'utente con il programma.  
+
+All'avvio del programma l'utente si trova davanti a un menù che permette di scegliere se iniziare a giocare senza effettuare un login, se effettuare un login o se registrare un nuovo utente.  
+Se l'utente sceglie di effettuare il login, verrà portato a una schermata con due box per l'input e due bottoni. Dopo l'inserimento da parte dell'utente di uno username e una password, l'utente potrà premere il tasto login per collegarsi con il server.  
+Il successo del processo di login si può vedere dal menù iniziale: se il login ha avuto successo sarà presente il bilancio dell'utente.  
+Se l'utente decide di registrare un nuovo utente, verrà portato in una schermata simile a quella precedente. Dopo l'inserimento di uno username e una password, l'utente potrà premere il tasto register per registrare un nuovo utente.  
+L'utente appena registrato potrà poi essere usato nella schermata di login.  
+Se nella schermata di login o di registrazione l'utente desiderasse interrompere il processo, potrà premere il tasto back per tornare al menù iniziale.  
+
+Se l'utente decide di premere play, verrà valutato lo stato dell'utente.  
+Se l'utente ha fatto il login, il suo bilancio verrà caricato nel tavolo virtuale e le funzionalità per puntare saranno rese disponibili.  
+Se l'utente non ha fatto il login, non sarà mostrato nessun bilancio e i tasti per accedere alla puntata non saranno funzionanti.  
+
+Quando l'utente entra nel tavolo virtuale, potrà vedere due carte nella sua mano e due carte nella mano del banco, di cui una coperta.  
+L'utente potrà quindi scegliere fra i seguenti comandi: Hit, Stand, Surrend, Double Down, Bet.  
+Se viene scelto Hit, verrà pescata una nuova carta che sarà poi aggiunta alla mano.  
+Se viene scelto Stand, il banco pescherà fino al raggiungimento o superamento di 17 e rivelerà la sua mano. A quel punto verrà calcolato il risultato della partita, che sarà poi mostrato nella schermata finale.  
+Se viene scelto Surrend, la partita finirà immediatamente in una sconfitta.  
+Se viene scelto Double Down, verrà pescata un'ultima carta e si procederà al termine della partita e al calcolo del risultato  
+Se viene scelto Bet, si aprirà la schermata delle puntate, dove l'utente avrà la possibilità di selezionare una puntata. Questo tasto non sarà funzionante se si sta giocando offline.  
+
+Sul lato sinistro dello schermo, se l'utente è online, sarà visibile il bilancio attuale e la puntata attuale.  
+Il bilancio viene modificato una volta che la partita è terminata.  
+Se l'utente ha perso, la puntata verrà sottratta. Se l'utente ha vinto, la puntata verrà aggiunta.  
+Alla puntata si applicano i seguenti moltiplicatori:  
+Se l'utente si è arreso, la puntata sarà dimezzata.  
+Se l'utente ha selezionato Double Down, la puntata sarà raddoppiata.  
+Se l'utente ha vinto ottenendo un Blackjack, la puntata sarà raddoppiata.  
+
+Quando l'utente sballa, preme Stand o preme Surrend, la partita finirà e verrà creata la schermata finale.  
+Nella schermata finale sono presenti due elementi: un testo che descrive il risultato della partita e un bottone Retry.  
+
+Se viene premuto retry, verrà iniziata una nuova partita.  
+
+Se l'utente desidera uscire dall'applicazione, potrà farlo tramite il tasto escape in qualsiasi schermata di gioco.  
+
+Il cambiamento del bilancio dell'utente e la registrazione dell'utente stesso sono salvati su un server in modo da essere disponibili per future partite.  
+
+Il programma è stato pensato per essere leggero e occupare il minor spazio possibile, motivo per cui l'unica risorsa grafica esterna è un font e motivo per il quale la grafica è realizzata attraverso codice piuttosto che attraverso immagini.  
+
+### Per il sistema
+
+Il codice del sistema è stato progettato per effettuare un numero ridotto di ripetizioni e allocazioni in memoria dove possibile, in modo da ridurre l'utilizzo delle risorse del computer.  
+All'interno del sistema sono state utilizzate variabili globali. Per facilitare la comprensione dello scopo sono state dichiarate come static, anche se la rimozione di static non cambierebbe il risultato dell'esecuzione del codice.  
+Il codice è diviso in parti riutilizzabili e in parti non riutilizzabili, in modo da mantenere l'efficienza del codice mantenendo comunque la riusabilità del codice dove possibile.  
+
+La maggior parte delle interfacce grafiche è creata attraverso il codice senza l'utilizzo di risorse o immagini esterne, con l'eccezione di un font utilizzato per la creazione delle carte e per la schermata del titolo.  
+Le altre risorse usate sono parte di raylib e raygui.  
+
+Per facilitare il debugging in caso di errori, molti errori stampano del testo su stdin.  
+Raylib e Raygui stampano a loro volta su stdin quando inizializzano il contesto di OpenGL e caricano le risorse.  
+
+### Per il server
+
+Il server è stato progettato per gestire una connessione alla volta, ma in caso di futura distribuzione del software potrebbe essere implementato multithreading.  
+A scopo dimostrativo viene usato localhost, ma con aggiornamenti al codice lo stesso codice può essere riutilizzato per server separati.  
+
+Il server è progettato per ricevere in input delle stringhe, che vengono poi interpretate per determinare quali operazioni eseguire.  
+
+Il server ha accesso a un database SQLite, ma nonostante SQLite sia pensato unicamente per utilizzo locale, i query creati dalle funzioni per la gestione del database sono validi per qualsiasi sistema basato su SQL, quindi è possibile implementare un database esterno con modifiche (molto) relativamente minori al codice.  
+
+Il server è in grado di inviare segnali in risposta, sempre sotto forma di stringhe, che possono essere usati per controllare l'esito delle operazioni eseguite dal server e eventuali dati ritornati al client.  
+
+## Principali variabili, strutture di dati e file
+
+|File|Nome|Tipo|Descrizione|Valori|
+|----|----|----|-----------|------|
