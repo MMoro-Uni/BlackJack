@@ -372,4 +372,49 @@ Il server è in grado di inviare segnali in risposta, sempre sotto forma di stri
 |dbfunctions.h|AlterMoney|GameLogin|
 |dbfunctions.h|GetMoney|GameLogin, get_money_callback|
 
+## Pseudocodice
+
+### main
+```
+inizializza_finestra();
+menu_principale();
+se(errori nel menù principale)
+{
+ termina il programma;
+}
+altrimenti
+{
+ inizia_partita();
+ mentre(comincia nuova partita);
+}
+```
+### main menu
+```
+imposta_sfondo(verde);
+disegna_testo("BlackJack") con font("JqkasWild-w1YD6");
+crea_bottoni();
+se (online) disegna_testo(testo soldi);
+
+se (bottone_play_premuto)
+{
+ return: giocatore_online;
+}
+
+se (bottone_login_premuto)
+{
+ login_giocatore();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
