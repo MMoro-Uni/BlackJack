@@ -29,6 +29,8 @@
   * [Librerie esterne personalizzate](#librerie-esterne-personalizzate)
 * [Dipendenze tra funzioni](#dipendenze-tra-funzioni)
 * [Pseudocodice](#pseudocodice)
+* [Codifica](#codifica)
+* [Test](#test)
 
 
 ## Analisi
