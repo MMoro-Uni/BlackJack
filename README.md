@@ -385,15 +385,15 @@ se(errori nel menù principale)
 altrimenti
 {
  inizia_partita();
- mentre(comincia nuova partita);
+ mentre(comincia_nuova_partita);
 }
 ```
 ### menù principale
 ```
 imposta_sfondo(verde);
-disegna_testo("BlackJack") con font("JqkasWild-w1YD6");
+disegna_testo("BlackJack");
 crea_bottoni();
-se (online) disegna_testo(testo soldi);
+se (online) disegna_testo("soldi = <soldi>");
 
 se (bottone_play_premuto)
 {
@@ -464,9 +464,190 @@ se (bottone_back_premuto)
 }
 
 ```
+### server login
+```
+connessione_al_server();
+manda("Username = <username>");
+manda("Password = <password>");
+manda("Login");
+
+ricevi();
+se (messaggio_ricevuto = "login avvenuto")
+{
+ return login_riuscito;
+}
+altrimenti
+{
+ return login_fallito;
+}
+```
+### server register
+```
+connessione_al_server();
+manda("Username = <username>");
+manda("Password = <password>");
+manda("Register");
+
+ricevi();
+se (messaggio_ricevuto = "register avvenuto")
+{
+ return register_riuscito;
+}
+altrimenti
+{
+ return register_fallito;
+}
+```
+### Inizia partita
+```
+inizializza_finestra();
+
+crea_mazzo(numero_mazzi_standard);
+mischia_mazzo();
+
+pesca_carte(giocatore);
+pesca_carte(banco);
+calcola_punteggio(giocatore);
+calcola_punteggio(banco);
+
+disegna_carte()
+crea_bottoni()
+
+se(bottone_hit_premuto)
+{
+ pesca_carta(giocatore)
+ calcola_punteggio(giocatore);
+ disegna_carte();
+}
+
+se(bottone_stand_premuto)
+{
+ termina_gioco;
+}
+
+se(bottone_surrend_premuto)
+{
+ termina_gioco;
+ azioni_banco();
+}
+
+se(bottone_doubledown_premuto)
+{
+ pesca_carta(giocatore);
+ se (online)
+ {
+  puntata * 2;
+ }
+ termina_gioco;
+ azioni_banco();
+}
+
+se(bottone_bet_premuto) e (online)
+{
+ apri_schermata_puntata();
+}
 
 
+se(termina_gioco)
+{
+ se (vittoria)
+ {
+  apri_schermata_fine(vittoria);
+ }
+altrimenti se (sconfitta)
+{
+ apri_schermata_fine(sconfitta);
+}
+```
+### apri schermata puntata
+```
+inizializza_finestra();
 
+crea_bottoni();
+crea_text_input();
+
+se (bottone_bet_premuto)
+{
+ prendi (puntata)
+ return puntata;
+}
+
+```
+### apri schermata fine
+```
+inizializza_finestra();
+
+crea_bottoni();
+
+se (vittoria)
+{
+ disegna_testo("vittoria");
+}
+altrimenti se (sconfitta)
+{
+ disegna_testo("sconfitta");
+}
+
+se (bottone_retry_premuto)
+{
+  comincia_nuova_partita
+}
+```
+### crea mazzo
+```
+per ogni (mazzo_dato)
+{
+ per (52 carte)
+ {
+  crea_carta(carta_da_creare)
+  metti (carta_creata) in (mazzo_da_restituire)
+ }
+}
+
+return mazzo_da_restituire
+```
+### mischia mazzo
+```
+//algoritmo di Fisher-Yates
+```
+### pesca carta
+```
+prendi da (mazzo) posizione (0);
+sposta_elementi (mazzo) valore (-1);
+return carta_presa;
+```
+### calcola punteggio
+```
+punteggio = 0;
+per ogni (carta) in (mano_data)
+{
+ se (carta = asso)
+ {
+  punteggio + 11;
+ }
+ altrimenti se (carta = figura)
+ {
+  punteggio + 10;
+ }
+ altrimenti
+ {
+  punteggio + valore_carta;
+ }
+}
+
+se (punteggio > 21)
+{
+ fino a che (punteggio > 21) e per ogni (carta) in (mano_data)
+ {
+  se (carta = asso)
+  {
+   punteggio - 10;
+  }
+}
+
+return punteggio;
+ 
+```
 
 
 
