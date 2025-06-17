@@ -258,5 +258,33 @@ Il server è in grado di inviare segnali in risposta, sempre sotto forma di stri
 
 ## Principali variabili, strutture di dati e file
 
-|File|Nome|Tipo|Descrizione|Valori|
-|----|----|----|-----------|------|
+### Client
+
+|File|Nome|Tipo|Ruolo|Descrizione|Valori|
+|---------|---------|---------|-------------|--------------------------------|------------|
+|blackjackclient.c|iResult|int|variabile globale|contiene il risultato delle operazioni del client| |
+|blackjackclient.c|ConnectSocket|SOCKET|variabile globale|contiene i dettagli del socket per la connessione al server| |
+|blackjackclient.c|qbuffer|char[]|array globale|contiene il query da mandare al server| |
+|blackjackclient.c|recvbuf|char[]|array globale|contiene i dati inviati dal server al client| |
+|gamemenu.c|WINDOW_HEIGHT| |define|contiene l'altezza del menù, usata nello scaling degli oggetti creati per l'interfaccia grafica|625|
+|gamemenu.c|WINDOW_WIDTH| |define|WINDOW_HEIGHT ma per la larghezza|1200|
+|gamemenu.c|TitleFont|Font|variabile globale|contiene il font per il titolo del gioco|LoadFontEx("JqkasWild-w1YD6.tff",128,0,250)|
+|gamemenu.c|DefaultFont|Font|variabile globale|contiene il font per il resto delle scritte|GetFontDefault()|
+|gamewindow.c|PlayerHand|CARD[]|array globale|contiene le carte della mano del giocatore| |
+|gamewindow.c|DealerHand|CARD[]|array globale|contiene le carte della mano del banco| |
+|gamewindow.c|GameDeck|DECK|variabile globale|contiene il mazzo usato nel gioco| |
+|gamewindow.c|endgame_code|SIGNAL|variabile globale|contiene il risultato della partita| |
+|gamewindow.c|money_value_string|char[]|array globale|contiene la stringa usata come valore per il testo del bilancio| |
+|gamewindow.c|money_bet_string|char[]|array globale|contiene la stringa usata come valore per il testo della puntata. IMPORTANTE: non contiene solo il valore| |
+|gamewindow.c|screen_width|float|variabile globale|contiene il valore della larghezza dello schermo. Usato per decidere se ridimensionare elementi dell'interfaccia e per trovare le misure corrette| |
+|gamewindow.c|screen_height|float|variabile globale|screen_width ma per l'altezza| |
+|gamewindow.c|CardFont|Font|variabile globale|contiene il font per il numero/lettera sulle carte|LoadFontEx("JqkasWild-w1YD6.tff",128,0,250)|
+|gamewindow.c|SuitFont|Font|variabile globale|contiene il font per il simbolo del seme delle carte|LoadFontEx("JqkasWild-w1YD6.tff",32,0,250)|
+|gamewindow.c|DefaultFont|Font|variabile globale|contiene il font per il resto delle scritte|GetFontDefault()|
+|blackjackclient.h|login_mode|enum| |enum per la modalità di uso della finestra di login e della funzione di login, typedef come MODE|LOGIN_MODE=20, REGISTER_MODE|
+|blackjackclient.h|login_result|enum| |enum per il risultato di login/register, typedef come RESULT|LOGIN_SUCCESS = 2, LOGIN_FAIL, REGISTER_SUCCESS, REGISTER_FAIL|
+|cardstructs.h|card|struct| |struct per le carte, typedef come CARD|int rank, char* suit|
+|cardstructs.h|deck|struct| |struct per i mazzi, typedef come DECK|CARD* cards, int current_card_number;|
+|gamemenu.h|online_mode|enum| |enum per il successo del login, typedef come ONMODE|ONLINE_PLAY = 10, OFFLINE_PLAY|
+|gamewindow.h|endgame_signals|enum| |enum per il segnale di fine gioco, typedef come SIGNAL|PLAYER_WIN = 100, PLAYER_LOSE, PLAYER_BUST, PLAYER_CHARLIE, PLAYER_BLACKJACK, PLAYER_DRAW|
+
