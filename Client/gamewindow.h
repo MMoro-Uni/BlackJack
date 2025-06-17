@@ -1,3 +1,9 @@
+/*!
+* \file gamewindow.h
+* \brief contains declaration of GameStart.
+*        also contains enum for endgame signal usedby gamewindow.c
+*/
+
 #ifndef ONLINE_MODE_CALL
 #include "gamemenu.h"
 #define ONLINE_MODE_CALL
