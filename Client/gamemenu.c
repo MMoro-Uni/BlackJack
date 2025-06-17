@@ -1,3 +1,29 @@
+/*!
+* \file gamemenu.c
+* \brief contains code for the main menu of the game
+* the code in this file is not meant for usage outside of the project. Don't include in other projects without modifying first.
+*/
+
+/*!
+* \fn ONMODE MainMenu()
+* \brief draws the main menu, handles calling other functins for the menu and returns if login happened or not.
+* Online mode is returned after the play button is pressed.
+* Buttons are contained inside an array to simplify code reading, avoid giant if conditions and to make it easier to implement new buttons.
+* A full implementation for new button creation hasn't been made, but the logic should help implementing it.
+* Currently, ButtonArray[0] is the play button, ButtonArray[1] is the login button and ButtonArray[2] is the register button
+*/
+
+/*!
+* \fn RESULT LoginRegisterInterface(MODE mode)
+* \brief draws the login or register interface and calls client functions for server calls
+* mode is used for choosing to login or to register.
+* The return value is the result of the login or register process.
+* Input Boxes and Buttons are contained in arrays for the same reason as MainMenu()
+* Currently, InputBoxArray[0] is used for username and InputBoxArray[1] is used for password.
+* ButtonArray[0] is the login/register button, ButtonArray[1] is the back button.
+*/
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <raylib.h>
@@ -10,6 +36,7 @@
 #define WINDOW_WIDTH 1200
 #define TEXT_BUFF_SIZE 65
 #define BUTTON_AMOUNT 3
+//when changing style for raygui through code, color needs to be given as a 32bit integer
 #define WHITE_32 0xffffffff
 #define BLUE_TRANSP_32 0x97E8FF80
 #define RL_BUTTON_AMOUNT 2
