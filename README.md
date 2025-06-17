@@ -145,6 +145,14 @@ di seguito sono descritte schematicamente le funzionalità implementate
 |gamewindow.c|void draw_end_screen(SIGNAL mode)|crea la schermata finale. Usa mode per scegliere il messaggio da visualizzare|
 |gamewindow.c|int draw_bet_screen()|crea la schermata per impostare la puntata, ritorna il valore della puntata|
 
-
-
 #### Funzioni del server
+
+|File|Funzione|Descrizione|
+|----|--------|-----------|
+|BlackJackServer.c|int main(int argc, char argv[])|funzione main del server, esegue la logica del server, inclusa la ricezione e l'invio di segnali e la gestione degli input ricevuti|
+|dbfunctions.c|int GameLogin(char username[], char password[], sqlite3* ConnectedDB)|controlla che l'utente esista all'interno del database dato. Ritorna NO_USER_FOUND (11) se l'utente non esiste, menre ritorna USER_FOUND (12) se l'utente esiste|
+|dbfunctions.c|int GameRegister(char username[], char password[], sqlite3* ConnectedDB)|Crea una nuova riga nel database degli utenti con le credenziali passate. Ritorna REG_DONE (14) se l'operazione ha avuto successo|
+|dbfunctions.c|int AlterMoney(char username[], char password[], int value_modifier, sqlite3* ConnectedDB)|modifica il bilancio dell'utende dato del valore indicato da value_modifier. Prima di modificare il valore controlla l'esistenza dell'utente. Ritorna UPDATE_DONE (15) se l'operazione ha avuto successo|
+|dbfunctions.c|int GetMoney(char username[], char password[], char money_buffer[], sqlite3* ConnectedDB)|inserisce in money_buffer una stringa contenente il bilancio dell'utente dato. Prima di inserire il valore nella stringa controlla l'esistenza dell'utente. Ritorna OBTAIN_DONE (16) se l'operazione ha avuto successo|
+
+
