@@ -17,6 +17,18 @@
     * [Giocatore](#giocatore)
     * [Funzioni del sistema](#funzioni-del-sistema)
     * [Funzioni del server](#funzioni-del-server)
+* [Casi d'uso](#casi-duso)
+* [Progettazione](#progettazione)
+  * [Per l'interfaccia utente](#per-linterfaccia-utente)
+  * [Per il sistema](#per-il-sistema)
+  * [Per il server](#per-il-server)
+* [Principali variabili, strutture dati e file](#principali-variabili-strutture-di-dati-e-file)
+* [Librerie e funzioni](#librerie-e-funzioni)
+  * [Librerie standard utilizzate](#librerie-standard-utilizzate)
+  * [Librerie esterne non personalizzate](#librerie-esterne-non-personalizzate)
+  * [Librerie esterne personalizzate](#librerie-esterne-personalizzate)
+* [Dipendenze tra funzioni](#dipendenze-tra-funzioni)
+
 
 ## Analisi
 
@@ -285,7 +297,8 @@ Il server è in grado di inviare segnali in risposta, sempre sotto forma di stri
 |cardstructs.h|deck|struct| |struct per i mazzi, typedef come DECK|CARD* cards, int current_card_number;|
 |gamemenu.h|online_mode|enum| |enum per il successo del login, typedef come ONMODE|ONLINE_PLAY = 10, OFFLINE_PLAY|
 |gamewindow.h|endgame_signals|enum| |enum per il segnale di fine gioco, typedef come SIGNAL|PLAYER_WIN = 100, PLAYER_LOSE, PLAYER_BUST, PLAYER_CHARLIE, PLAYER_BLACKJACK, PLAYER_DRAW|
-
+| |BlackJackDB.db|file database| |database per il login e il salvataggio del bilancio| |
+ 
 ## Librerie e funzioni
 
 ### Librerie standard utilizzate
