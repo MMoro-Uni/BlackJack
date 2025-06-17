@@ -28,6 +28,7 @@
   * [Librerie esterne non personalizzate](#librerie-esterne-non-personalizzate)
   * [Librerie esterne personalizzate](#librerie-esterne-personalizzate)
 * [Dipendenze tra funzioni](#dipendenze-tra-funzioni)
+* [Pseudocodice](#pseudocodice)
 
 
 ## Analisi
