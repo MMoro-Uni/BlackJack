@@ -1,6 +1,22 @@
 # BlackJack
 
 ## Sommario
+* [Analisi](#analisi)
+  * [Introduzione al problema](#introduzione-al-problema)
+  * [Funzionalità per il giocatore](#funzionalità-per-il-giocatore)
+  * [Funzionalità del banco automatico](#funzionalità-del-banco-automatico)
+  * [Funzionalità del sistema](funzionalità-del-sistema)
+  * [Analisi delle specifiche del problema](#analisi-delle-specifiche-del-problema)
+  * [Attori del sistema](#attori-del-sistema)
+  * [Funzionalità per il giocatore](#funzionalità-per-il-giocatore-1)
+  * [Funzionalità per il sistema](#funzionalità-per-il-sistema)
+  * [Funzionalità per il server](#funzionalità-per-il-server)
+  * [Requisiti non funzionali](#requisiti-non-funzionali)
+  * [Flusso utente](#flusso-utente---esempio-partita-con-connessione-al-server)
+  * [Requisiti funzionali](#requisiti-funzionali)
+    * [Giocatore](#giocatore)
+    * [Funzioni del sistema](#funzioni-del-sistema)
+    * [Funzioni del server](#funzioni-del-server)
 
 ## Analisi
 
